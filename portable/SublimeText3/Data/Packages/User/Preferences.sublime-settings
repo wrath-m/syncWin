@@ -1,0 +1,19 @@
+{
+	"auto_match_enabled": false,
+	"binary_file_patterns":
+	[
+		".git/*",
+		"node_modules/*"
+	],
+	"file_exclude_patterns":
+	[
+
+	],
+	"font_size": 13,
+	"line_padding_bottom": 5,
+	"line_padding_top": 5,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": true
+}

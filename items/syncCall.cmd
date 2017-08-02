@@ -1,0 +1,1 @@
+PowerShell -NoProfile -ExecutionPolicy Bypass -NoExit "%SYSTEMDRIVE%\syncCore\items\sync.ps1"
