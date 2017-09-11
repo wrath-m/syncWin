@@ -28,7 +28,7 @@
 
 # ----------------------------------------------------------------------#
 
-$currentDrive = (Get-Location).Drive.Name + ':'
+$currentDrive = $env:USERPROFILE
 
 $watch = @(
     @('\portable\SublimeText3\Data\Packages\User', @('Preferences.sublime-settings')),
@@ -40,9 +40,11 @@ Unregister-Event FileChanged -EA 'SilentlyContinue'
 $nullPath = $currentDrive + '\syncCore\null'
 runSyncFunc.cmd > $nullPath 2>&1
 
+echo $currentDrive
+
 # Update synced files from source
 $copy = $currentDrive + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
-$paste = $currendDrive + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
+$paste = $currentDrive + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
 Copy-Item $copy $paste
 
 $folder = $currentDrive + '\sync\portable\SublimeText3\Data\Packages\User' # Enter the root path you want to monitor.
