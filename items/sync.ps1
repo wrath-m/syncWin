@@ -28,7 +28,7 @@
 
 # ----------------------------------------------------------------------#
 
-$currentDrive = $env:USERPROFILE
+$userProfile = $env:USERPROFILE
 
 $watch = @(
     @('\portable\SublimeText3\Data\Packages\User', @('Preferences.sublime-settings')),
@@ -37,17 +37,17 @@ $watch = @(
 
 Unregister-Event FileChanged -EA 'SilentlyContinue'
 
-$nullPath = $currentDrive + '\syncCore\null'
-runSyncFunc.cmd > $nullPath 2>&1
+$nullPath = $userProfile + '\syncCore\null'
+$userProfile + '\syncCore\items\runSyncFunc.cmd' > $nullPath 2>&1
 
-echo $currentDrive
+echo $userProfile
 
 # Update synced files from source
-$copy = $currentDrive + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
-$paste = $currentDrive + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
+$copy = $userProfile + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
+$paste = $userProfile + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
 Copy-Item $copy $paste
 
-$folder = $currentDrive + '\sync\portable\SublimeText3\Data\Packages\User' # Enter the root path you want to monitor.
+$folder = $userProfile + '\sync\portable\SublimeText3\Data\Packages\User' # Enter the root path you want to monitor.
 $filter = '*.*'  # You can enter a wildcard filter here.
 
 # In the following line, you can change 'IncludeSubdirectories to $true if required.
@@ -58,8 +58,8 @@ Register-ObjectEvent $sublimeSettings Changed -SourceIdentifier FileChanged -Act
     $changeType = $Event.SourceEventArgs.ChangeType
     $timeStamp = $Event.TimeGenerated
     if ($name -eq 'Preferences.sublime-settings') {
-        $copy = $currentDrive + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
-        $paste = $currentDrive + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
+        $copy = $userProfile + '\sync\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
+        $paste = $userProfile + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
         Copy-Item $copy $paste
         Stop-Job -Name pushChangesTimeout
         Start-Job -Name pushChangesTimeout -ScriptBlock {
