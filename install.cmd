@@ -29,13 +29,13 @@ if '%errorlevel%' NEQ '0' (
 
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 icacls "%SYSTEMDRIVE%\ProgramData\chocolatey" /grant Users:(OI)(CI)F
-mkdir %SYSTEMDRIVE%\sync
-mkdir %SYSTEMDRIVE%\syncCore
+mkdir %USERPROFILE%\sync
+mkdir %USERPROFILE%\syncCore
 choco install git -params '"/GitAndUnixToolsOnPath"'
 setx /M PATH "%PATH%;%SYSTEMDRIVE%\Program Files\Git\cmd;%SYSTEMDRIVE%\Program Files\Git\usr\bin"
 call "refreshEnvPath.cmd"
-ssh-agent bash -c 'ssh-add "%cd%\ssh-keys\id_rsa"; git clone git@github.com:scarrtech/syncWin.git "%SYSTEMDRIVE%\syncCore\."'
-setx /M PATH "%PATH%;%SYSTEMDRIVE%\syncCore\items"
-cp -r "%SYSTEMDRIVE%\syncCore\portable" "%SYSTEMDRIVE%\sync"
-cp "%SYSTEMDRIVE%\syncCore\items\syncRunProcess.cmd" "%SYSTEMDRIVE%\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\syncRunProcess.cmd"
-PowerShell -NoProfile -ExecutionPolicy Bypass -NoExit "%SYSTEMDRIVE%\syncCore\items\sync.ps1"
+ssh-agent bash -c 'ssh-add "%cd%\ssh-keys\id_rsa"; git clone git@github.com:scarrtech/syncWin.git "%USERPROFILE%\syncCore\."'
+setx /M PATH "%PATH%;%USERPROFILE%\syncCore\items"
+cp -r "%USERPROFILE%\syncCore\portable" "%USERPROFILE%\sync"
+cp "%USERPROFILE%\syncCore\items\syncRunProcess.cmd" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\syncRunProcess.cmd"
+PowerShell -NoProfile -ExecutionPolicy Bypass -NoExit "%USERPROFILE%\syncCore\items\sync.ps1"
