@@ -34,8 +34,8 @@ choco install git -params '"/GitAndUnixToolsOnPath"'
 mkdir %SYSTEMDRIVE%\syncCore
 setx /M PATH "%PATH%;%SYSTEMDRIVE%\Program Files\Git\cmd;%SYSTEMDRIVE%\Program Files\Git\usr\bin"
 call "refreshEnvPath.cmd"
-ssh-agent bash -c 'ssh-add "%cd%\items\ssh-keys\id_rsa"; git clone git@github.com:scarrtech/syncWin.git "%SYSTEMDRIVE%\syncCore\."'
+ssh-agent bash -c 'ssh-add "%cd%\ssh-keys\id_rsa"; git clone git@github.com:scarrtech/syncWin.git "%SYSTEMDRIVE%\syncCore\."'
 setx /M PATH "%PATH%;%SYSTEMDRIVE%\syncCore\items"
 cp -r "%SYSTEMDRIVE%\syncCore\portable" "%SYSTEMDRIVE%\sync"
-cp "%SYSTEMDRIVE%\syncCore\items\syncCall.cmd" "%SYSTEMDRIVE%\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\syncCall.cmd"
+cp "%SYSTEMDRIVE%\syncCore\items\syncRunProcess.cmd" "%SYSTEMDRIVE%\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\syncRunProcess.cmd"
 PowerShell -NoProfile -ExecutionPolicy Bypass -NoExit "%SYSTEMDRIVE%\syncCore\items\sync.ps1"

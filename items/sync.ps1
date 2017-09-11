@@ -38,7 +38,7 @@ $watch = @(
 Unregister-Event FileChanged -EA 'SilentlyContinue'
 
 $nullPath = $currentDrive + '\syncCore\null'
-runSyncProc.cmd > $nullPath 2>&1
+runSyncFunc.cmd > $nullPath 2>&1
 
 # Update synced files from source
 $copy = $currentDrive + '\syncCore\portable\SublimeText3\Data\Packages\User\Preferences.sublime-settings'
